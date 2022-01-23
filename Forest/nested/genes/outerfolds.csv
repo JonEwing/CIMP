@@ -1,0 +1,2 @@
+Seperator Type,Mutation Amount,TP,FP,FN,TN,Accuracy Test set,Accuracy Validation Set,Sensitivity,Specificity,Precision,Miss Rate,False discovery rate,False omission rate,roc_auc
+Chi>3.84,893,7.7,1.3,3.1,12.9,0.9152986850669267,0.8240000000000001,0.6950613275613277,0.9166152066887362,0.8408516483516483,0.30493867243867245,0.15914835164835167,0.1853568971448228,0.9114928486546134
