@@ -3,3 +3,9 @@ _samples_data/catherins_data.csv
 _samples_data/data/ucec_tcga_pan_can_atlas_2018.tar.gz
 _samples_data/data/ucs_tcga_pan_can_atlas_2018.tar.gz
 _samples_data/data/coadread_tcga_pan_can_atlas_2018.tar.gz
+Classification/KNN/input/mutfeats_C.csv
+Classification/MLP/input/results_C.csv
+Classification/SVM/input/catherin/mutfeats_C.csv
+Classification/SVM/input/catherin/results_C.csv
+Classification/MLP/input/mutfeats_C.csv
+Classification/KNN/input/results_C.csv
