@@ -1,0 +1,48 @@
+Pathways or possible mechinisims that are convergining in cimp
+WENT pathway for CIMP
+
+Background slide
+
+Hypothisis:
+What is cimp, and how does it work
+What are the effects of cimp on the operation of the genome
+
+Contrast agiants the normal cells
+
+There are already muations that corrilate with cimp
+
+How do mutations relate to DNA methilation
+
+
+Are there multiple mechinisums or paths to reach CIMP+
+
+How does the Uterine cancer relate to other cancer types. i.e. Colorectal
+Do the CIMP positive samples use the same mechinisums?
+If the mutations converge on the same pathways
+
+Is CIMP a function of DNA repare processes
+
+C. Repeat the process for CIMP+ subgroups
+
+add more details to AIM 3
+
+
+
+Compare cromitine modifying genes
+Layout in plainterms the goal of the forests
+
+Exploration in removing features that are not important
+itteravly each week refine approcuh in result for only things we want to keep
+8000 + features boil it down to only important features
+
+Maybe first elemenate that doesnt have CIMP+
+
+What can we just remove immediatly,
+Ways in order to uncover all data
+
+All mutations that are related to CIMP+
+	Related in somehow apart of the disease
+	
+
+Using CIMP+ samples it is possible to discover mutations if they exsist
+There may be mutations that strongly corrilate to the CIMP+ condition

@@ -9,3 +9,7 @@ Classification/SVM/input/catherin/mutfeats_C.csv
 Classification/SVM/input/catherin/results_C.csv
 Classification/MLP/input/mutfeats_C.csv
 Classification/KNN/input/results_C.csv
+expression/data/UCS.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt
+expression/data/UCEC.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt
+expression/Notebook/data_mutations_extended.txt
+expression/Notebook/UCEC.rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data.data.txt

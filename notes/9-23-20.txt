@@ -1,0 +1,22 @@
+Ask about subtypes 
+ask for references for 4 types
+
+UCEC
+Uterine Corpus Endometrial Carcinoma
+
+tabel 1.3
+
+
+pathalogical subtype of each subtype
+endometriod or serus
+
+MSI
+Microsatellite Instable
+CN_Low
+Copy Number Low
+CN_High
+Copy Number High
+POLE
+Polymerase ε ultramutated
+
+the brode firehose

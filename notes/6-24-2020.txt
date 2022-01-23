@@ -1,0 +1,17 @@
+Add one more bullet to DRD5
+future work may include exploration of dopimine receptors of DRD5 in this cancer type.
+expand the list on slide 3
+
+Overall Heatmap
+
+fix heatmaps for the names
+
+
+Network diagram of the boxes
+cytoscape
+
+
+greedy selection #2
+cimp+/total / non-cimp+ / total
+
+Talk about corrilation is only cimp+

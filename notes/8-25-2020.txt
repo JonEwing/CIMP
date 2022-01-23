@@ -1,0 +1,46 @@
+Set up next steps for kmeans
+
+codense dense tell a story slide (adobe illistrator)
+Make a slide of big questions
+Overall flowcahrt
+key graph
+
+send welch email about dense adobe modle
+
+pull subtrees from cluster heatmaps
+
+research question and summary of finding
+flowcart 
+Cluster heatmaps
+
+Speadsheet with three colums 1,2,3 
+How many of each mutation for each row
+
+network diagrams
+number of coocurring feautres
+
+clusters of cimp+ pn shared mutations
+
+steps: hierarchical clustering
+
+Effectivneess of clustering
+fix pvalue arrow
+
+
+Reseach question
+Are there subgroups of samples that have simialar characteristics?
+
+clustering of mutations
+clustering of samples
+
+minipulate dendergram
+
+read on hirarchical clustering
+
+Stomach cancer
+
+4 slides
+
+kmeans samples
+kmeans mutations
+same two higerarchical

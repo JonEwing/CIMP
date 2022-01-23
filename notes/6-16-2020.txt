@@ -1,0 +1,24 @@
+Bio informatics certificate
+MCB7200
+
+Data Mining
+
+CS6950
+
+
+corrilation
+top 10 values
+scatterplot
+
+top 10
+fisher exact value
+accuaray
+infogain
+sensitivity
+specificity
+f value
+
+CS 5170 	Data Mining With Applications in the Life Sciences 	2227
+MCB 7200 	Molecular Biology 									9220
+CS 6940 	Research in Computer Science 						2205
+CS 6950 	Thesis Research 									1066

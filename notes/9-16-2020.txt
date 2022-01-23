@@ -1,0 +1,10 @@
+
+We have pushed greedy as far as it can go.
+
+NExt stepss are cross validation and Higher quality algorithem (random forests)
+
+TP53
+
+look into clincal data
+mutigene Tool
+MSI

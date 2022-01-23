@@ -1,0 +1,30 @@
+
+Add to chart
+Cart Phi
+Gini index
+Desion Tree
+Greedy selection method
+
+color
+
+
+look into DRD5:
+DRD5
+This gene encodes the D5 subtype of the dopamine receptor. 
+The D5 subtype is a G-protein coupled receptor which stimulates adenylyl cyclase.
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7259201/
+
+Look at most negitivly corrilated grouping
+Make scatterplot of all corrilation values
+
+Look at the tool again
+
+Look at the mutations in each of the boxes
+
+Make slide to sumorize DRD5
+DRD5 Gene
+Bulletpoints
+citation
+
+Scatterplot y is values and x is pair
+Makea box / violen plot

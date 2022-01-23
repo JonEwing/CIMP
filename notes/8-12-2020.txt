@@ -1,0 +1,5 @@
+K-Means Klutering
+Assossiation rule
+Ask Katherine to ask what should go in and what I should recive from it
+
+Gene expression data

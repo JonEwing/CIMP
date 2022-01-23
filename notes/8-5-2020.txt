@@ -1,0 +1,20 @@
+Fix jitter
+
+Cimp+% - Cimp-%
+
+Enrichment vs mean
+
+Email tiffany hunter 
+CS5170
+
+
+Assosiation Rule mining
+Upset plot
+
+msi
+labiling by endometrioid or serios
+
+generate three list based on the three clusters
+get a list of muattions that apply to each group
+Anotate the groups with the two properities (MSi and Pathalogical catagory) pie cahrt or dendergram
+Place holder slide for diferental gene expression analisiy for each group vs Control group

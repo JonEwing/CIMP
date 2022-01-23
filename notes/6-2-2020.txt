@@ -1,0 +1,24 @@
+step 1)
+What are the apples and bannanas?
+Step 2)
+What are the characterisitcs of the apples
+how many do we have
+966
+
+	
+pick a left and right child
+for each node of the tree build a confusion matrix
+
+cimp+ and non-cimp+
+108 cimp+ samples
+271 non cimp+ samples
+fisher exact values
+	|
+ TP - FP
+
+	
+			 RPL22_GRCh37_1 value = 3.86145912552685E-09
+								  |
+RPL22_GRCh37_1 Value = 37/342 - - - - - PPP2R1A_GRCh37 Value = 24/0
+
+tp + tn / all

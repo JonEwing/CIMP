@@ -1,0 +1,47 @@
+Mkae plotly graph for % cover forground is TP/ Cimp+ total
+								background FP/ Non-Cimp+ total
+
+
+Differt colors based on filtering method
+green 	TP
+yellow	TP -FP
+red		FP > 0
+
+stacked barchart
+excel
+
+generate forground/ background plot 
+sideways bargraph
+enrichment = TP/FP or (TP/Cimp+)/(Fp/Non-Cimp+)
+
+radar chart
+matplotlib
+
+heatmap
+bands soreted by cimp+ coverage
+cimp+
+cimpi
+cimp-
+
+
+fold change = enrichment
+
+make volcan and ma plot
+
+upsat r shiny
+
+
+Look at non-cimp+ instad of cimp+
+TCGA uterine cancer
+
+TP - FP node sizes
+build negitive network diagrams
+GO analysis
+fix gene level 70 to 75
+colum for weighted values
+slide with counts of how many chosen times
+
+bring back old corrilation boxes
+
+put gene names on heatmap
+add jitter

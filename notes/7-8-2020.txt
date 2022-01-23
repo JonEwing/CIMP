@@ -1,0 +1,17 @@
+Random forest and desision tree stats
+Identify 27 cimp+ RPL22
+How many have MSI
+In clinical data for samples
+
+make bar for mutation level
+
+circle 1 green dot for each cimp+ includeded
+google drawings
+
+read paper on msi
+
+samples containing mutations in XXX
+
+make slide for infogain
+one slidde for Phi function
+small example for self calulation 

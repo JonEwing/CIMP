@@ -1,0 +1,6 @@
+Pick highest
+remove all cimp+ in 1
+Calulate infogain of new dataset
+repeat until all cimp+ are gone
+
+if covering 2 then stop

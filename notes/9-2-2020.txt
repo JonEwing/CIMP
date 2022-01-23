@@ -1,0 +1,17 @@
+KRAS_GRCh37_12:25398284-25398284_Missense-Mutation_SNP_C-C-A_C-C-T_C-C-G
+RPL22_GRCh37_1:6257785-6257785_Frame-Shift-Del_DEL_T-T--
+
+generate stacked bar cahrt, donut, confustion matrix
+slide that provides the method and sources for hierarchical clustering
+list parameters and settings
+Packages and versions
+extract 5 subtrees
+
+
+We developed new ways to visualize things in a way we havent before. 
+
+stacked bar chart to show all three
+change fp and tp to cimp+
+donut chart
+
+jacard
