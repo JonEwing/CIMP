@@ -1,0 +1,5 @@
+.vscode/settings.json
+_samples_data/catherins_data.csv
+_samples_data/data/ucec_tcga_pan_can_atlas_2018.tar.gz
+_samples_data/data/ucs_tcga_pan_can_atlas_2018.tar.gz
+_samples_data/data/coadread_tcga_pan_can_atlas_2018.tar.gz
