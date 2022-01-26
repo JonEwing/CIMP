@@ -22,3 +22,5 @@ Make_data/mutations/copy_number_somatic_mutation.tsv
 Make_data/mutations/simple_somatic_mutation.open.tsv
 Make_data/mutations/structural_somatic_mutation.tsv
 Make_data/reduce/meth.tsv
+Classification/SVM/data
+Classification/RF/data

@@ -65,7 +65,7 @@ for a in params:
 total = []
 totalmean = []
 totalruns = 0
-crossfold = 11
+crossfold = 5
 
 tf = pd.DataFrame()
 remover = 0.0
@@ -164,11 +164,9 @@ while tf.empty:
             space['max_samples'] = [0.5, 0.75]
             space['criterion'] = ["gini", "entropy"]
 
-            # cancers = ["Uterine", "French"]
-            # for canc in cancers:
-            #     if canc == "French":
-            X_test = colrecdata[muts].to_numpy()
-            y_test = colrecdata['class'].to_numpy()
+            #Uncomment both lines if you want to use two datasets
+            #X_test = colrecdata[muts].to_numpy()
+            #y_test = colrecdata['class'].to_numpy()
 
             clf = RandomForestClassifier()            
             result = GridSearchCV(clf, space)
@@ -184,24 +182,6 @@ while tf.empty:
                 if y_test[x] == y_pred[x]:
                     correct = 1
                 predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
-
-                # if canc == "Uterine":
-                #     clf = RandomForestClassifier()     
-                #     result = GridSearchCV(clf, space)
-                #     result.fit(X_train, y_train)
-                #     best_model = result.best_estimator_
-                #     y_pred = best_model.predict(X_test)
-                #     probl = best_model.predict_proba(X_test)
-                #     probr = best_model.predict_proba(X_test)
-
-                #     predicted = []
-                #     for x in range(len(y_test)):
-                #         correct = 0
-                #         if y_test[x] == y_pred[x]:
-                #             correct = 1
-                #         predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
-
-
 
             TP = 0
             FP = 0
@@ -257,10 +237,6 @@ while tf.empty:
             tf.to_csv(path+'predicted.csv', index=False)
 
             print(str(cross + 1), "/", crossfold)
-
-            # if canc == "Uterine":
-            #     group1.append(hold)
-            # else:
             group.append(hold)
             total.append(hold)
 
