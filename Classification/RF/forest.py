@@ -13,7 +13,6 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import KFold, GridSearchCV
 
 df = pd.read_csv("input/results_new.csv")
-df = df[df["FP"] + df["TP"] >= 2]
 collist = df["Feature"].tolist()
 
 df = pd.read_csv("input/results.csv")
@@ -65,7 +64,7 @@ for a in params:
 total = []
 totalmean = []
 totalruns = 0
-crossfold = 5
+crossfold = 3
 
 tf = pd.DataFrame()
 remover = 0.0
@@ -165,8 +164,8 @@ while tf.empty:
             space['criterion'] = ["gini", "entropy"]
 
             #Uncomment both lines if you want to use two datasets
-            #X_test = colrecdata[muts].to_numpy()
-            #y_test = colrecdata['class'].to_numpy()
+            X_test = colrecdata[muts].to_numpy()
+            y_test = colrecdata['class'].to_numpy()
 
             clf = RandomForestClassifier()            
             result = GridSearchCV(clf, space)
@@ -177,11 +176,12 @@ while tf.empty:
             probr = best_model.predict_proba(X_test)
 
             predicted = []
+            names = colrecdata.index.to_list()
             for x in range(len(y_test)):
                 correct = 0
                 if y_test[x] == y_pred[x]:
                     correct = 1
-                predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
+                predicted.append([colrecdata.index.to_list()[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
 
             TP = 0
             FP = 0
@@ -249,13 +249,9 @@ while tf.empty:
         totalmean.append([parm[0]] + tfmean)
 
 
-        # tf = pd.DataFrame(group1, columns=["Seperator Type", "Three-Fold Run", "TP", "FP", "FN", "TN", "Accuracy", "Sensitivity", "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic", "Included Muts"])
-        # tf.to_csv(patha + 'group1_stats.csv', index=False)
-
-        # tf = tf.drop("Seperator Type", 1)
-        # tf = tf.drop("Three-Fold Run", 1)
-        # tfmean = tf.mean().values.tolist()
-        # totalmean.append([parm[0] + " : Uterine"] + tfmean)
+        jf = pd.DataFrame(muts, columns=["Mutations"])
+        jf.to_csv(patha + 'mutations.csv', index=False)
+        
 
         totalruns += 1
         print("\n")
@@ -271,7 +267,7 @@ while tf.empty:
                                         "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic",  "Included Muts"])
     tf.to_csv('total_mean.csv', index=False)
 
-    threshold = 0.8
+    threshold = 0.1
     tf = tf[tf["Accuracy"] >= threshold - remover]
     
     remover += 0.02

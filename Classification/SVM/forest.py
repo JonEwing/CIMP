@@ -28,8 +28,8 @@ df = df.loc[intlist]
 intlist.append("class")
 
 colrecdata = pd.read_csv('input/mutfeats_new.csv', index_col=0)
-#colrecdata = colrecdata[colrecdata["class"] != 2]
-colrecdata['class'] = colrecdata['class'].replace([2],-1)
+colrecdata = colrecdata[colrecdata["class"] != 2]
+#colrecdata['class'] = colrecdata['class'].replace([2],-1)
 colrecdata = colrecdata[intlist]
 
 utedata = pd.read_csv('input/mutfeats.csv', index_col=0)
@@ -63,7 +63,7 @@ for a in params:
 total = []
 totalmean = []
 totalruns = 0
-crossfold = 5
+crossfold = 10
 
 tf = pd.DataFrame()
 remover = 0.0
@@ -162,8 +162,8 @@ while tf.empty:
             space['tol'] = [0.001, 0.0001, 0.0000001]
 
             #Uncomment both lines if you want to use two datasets
-            #X_test = colrecdata[muts].to_numpy()
-            #y_test = colrecdata['class'].to_numpy()
+            X_test = colrecdata[muts].to_numpy()
+            y_test = colrecdata['class'].to_numpy()
 
             clf = svm.SVC(probability=True)            
             result = GridSearchCV(clf, space)
@@ -178,7 +178,7 @@ while tf.empty:
                 correct = 0
                 if y_test[x] == y_pred[x]:
                     correct = 1
-                predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
+                predicted.append([colrecdata.index.to_list()[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
 
             TP = 0
             FP = 0
@@ -269,7 +269,7 @@ while tf.empty:
                                         "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic",  "Included Muts"])
     tf.to_csv('total_mean.csv', index=False)
 
-    threshold = 0.8
+    threshold = 0.5
     tf = tf[tf["Accuracy"] >= threshold - remover]
     
     remover += 0.02
