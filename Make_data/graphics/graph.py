@@ -76,8 +76,8 @@ df = df.drop(["Sample_Mean","ClusterNumber"], axis = 1)
 
 # nf = nf.sort_values(by=['Sample_Mean'], ascending=False)
 
-fig, ax = plt.subplots(figsize=(9, 16))
-g = sns.heatmap(df)
+fig, ax = plt.subplots(figsize=(16,9))
+g = sns.heatmap(df, center=0.5)
 plt.xlabel("Probe Number")
 plt.ylabel("Sample ID") 
 

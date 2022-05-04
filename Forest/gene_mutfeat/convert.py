@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import fisher_exact
 
-featdat = pd.read_csv('mutfeats_new.csv', index_col=0)
+featdat = pd.read_csv('mutfeats_gas.csv', index_col=0)
 print("File read")
 results = [['Feature', 'TP', 'FP', 'TN', 'FN', 'p value']]
 

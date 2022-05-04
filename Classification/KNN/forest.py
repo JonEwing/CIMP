@@ -12,11 +12,10 @@ from sklearn import svm
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import KFold, GridSearchCV
 
-df = pd.read_csv("input/results_C.csv")
-df = df[df["FP"] + df["TP"] >= 2]
+df = pd.read_csv("../input/results_new.csv")
 collist = df["Feature"].tolist()
 
-df = pd.read_csv("input/results_J.csv")
+df = pd.read_csv("../input/results.csv")
 utelist = df["Feature"].tolist()
 
 intlist = list(set(collist) & set(utelist))
@@ -24,28 +23,23 @@ intlist = list(set(collist) & set(utelist))
 shutil.rmtree("data")
 os.mkdir("data")
 
-df = pd.read_csv("input/results_J.csv", index_col=0)
+df = pd.read_csv("../input/results.csv", index_col=0)
 df = df.loc[intlist]
 
 intlist.append("class")
 
-colrecdata = pd.read_csv('input/mutfeats_C.csv', index_col=0)
-#colrecdata = colrecdata[colrecdata["class"] != 2]
-colrecdata['class'] = colrecdata['class'].replace([2],-1)
+colrecdata = pd.read_csv('../input/mutfeats_new.csv', index_col=0)
+colrecdata = colrecdata[colrecdata["class"] != 2]
+#colrecdata['class'] = colrecdata['class'].replace([2],-1)
 colrecdata = colrecdata[intlist]
 
-utedata = pd.read_csv('input/mutfeats_j.csv', index_col=0)
+utedata = pd.read_csv('../input/mutfeats.csv', index_col=0)
 utedata = utedata[utedata["class"] != 2]
 #utedata['class'] = utedata['class'].replace([2],-1)
 utedata = utedata[intlist]
 
 shutil.rmtree("data")
-shutil.rmtree("roc_auc")
-shutil.rmtree("pr")
 os.mkdir("data")
-os.mkdir("roc_auc")
-os.mkdir("roc_auc/roc_median")
-os.mkdir("pr")
 
 df['chi'] = (((df["TP"] - df["TP"].mean()) ** 2) / df["TP"].mean()) + (((df["FP"] - df["FP"].mean()) ** 2) / df["FP"].mean()) + \
     (((df["TN"] - df["TN"].mean()) ** 2) / df["TN"].mean()) + \
@@ -65,7 +59,7 @@ for a in params:
 total = []
 totalmean = []
 totalruns = 0
-crossfold = 11
+crossfold = 5
 
 tf = pd.DataFrame()
 remover = 0.0
@@ -157,145 +151,101 @@ while tf.empty:
             y = datasetc['class'].to_numpy()
 
             X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=(1/crossfold), train_size=1 - (1/crossfold))
-
+            
             space = dict()
             space['n_neighbors'] = [2,3,4,5,10]
             space['algorithm'] = ["auto", "ball_tree", "kd_tree", "brute"]
             space['weights'] = ["uniform", "distance"]
 
-            cancers = ["Uterine", "Colrec"]
-            for canc in cancers:
-                if canc == "Colrec":
-                    X_test = colrecdata[muts].to_numpy()
-                    y_test = colrecdata['class'].to_numpy()
+            #Uncomment both lines if you want to use two datasets
+            X_test = colrecdata[muts].to_numpy()
+            y_test = colrecdata['class'].to_numpy()
 
-                    clf = KNeighborsClassifier()
-                    result = GridSearchCV(clf, space)
-                    result.fit(X_train, y_train)
-                    best_model = result.best_estimator_
-                    y_pred = best_model.predict(X_test)
-                    probl = best_model.predict_proba(X_test)
-                    probr = best_model.predict_proba(X_test)
+            clf = KNeighborsClassifier()            
+            result = GridSearchCV(clf, space)
+            result.fit(X_train, y_train)
+            best_model = result.best_estimator_
+            y_pred = best_model.predict(X_test)
+            probl = best_model.predict_proba(X_test)
+            probr = best_model.predict_proba(X_test)
 
-                    predicted = []
-                    for x in range(len(y_test)):
-                        correct = 0
-                        if y_test[x] == y_pred[x]:
-                            correct = 1
-                        predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
+            predicted = []
+            names = colrecdata.index.to_list()
+            for x in range(len(y_test)):
+                correct = 0
+                if y_test[x] == y_pred[x]:
+                    correct = 1
+                predicted.append([colrecdata.index.to_list()[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
 
-                if canc == "Uterine":
-                    clf = KNeighborsClassifier()
-                    result = GridSearchCV(clf, space)
-                    result.fit(X_train, y_train)
-                    best_model = result.best_estimator_
-                    y_pred = best_model.predict(X_test)
-                    probl = best_model.predict_proba(X_test)
-                    probr = best_model.predict_proba(X_test)
+            TP = 0
+            FP = 0
+            TN = 0
+            FN = 0
+            for x in predicted:
+                if x[1] == 1 and x[2] == 1:
+                    TP += 1
+                if x[1] != 1 and x[2] == 1:
+                    FP += 1
+                if x[1] != 1 and x[2] != 1:
+                    TN += 1
+                if x[1] == 1 and x[2] != 1:
+                    FN += 1
 
-                    predicted = []
-                    for x in range(len(y_test)):
-                        correct = 0
-                        if y_test[x] == y_pred[x]:
-                            correct = 1
-                        predicted.append([y_test[x], y_test[x],y_pred[x], probl[x][0], probr[x][1], correct])
+            parm[1] = cross
+            parm[2] = TP
+            parm[3] = FP
+            parm[4] = FN
+            parm[5] = TN
+            try:
+                parm[6] = (TP + TN) / (TP + FP + TN + FN)
+            except:
+                parm[6] = -1
+            try:
+                parm[7] = (TP) / (TP + FN)
+            except:
+                parm[7] = -1
+            try:
+                parm[8] = (TN) / (TN + FP)
+            except:
+                parm[8] = -1
+            try:
+                parm[9] = (TP) / (TP + FP)
+            except:
+                parm[9] = -1
+            try:
+                parm[10] = (FN) / (FN + TP)
+            except:
+                parm[10] = -1
+            try:
+                parm[11] = (FP) / (FP + TP)
+            except:
+                parm[11] = -1
+            try:
+                parm[12] = (FN) / (FN + TN)
+            except:
+                parm[12] = -1
 
-                # ROC_AUC
-                probs = best_model.predict_proba(X_test)
-                probs = probs[:, 1]
-                parm[13] = roc_auc_score(y_test, probs)
-                fpr, tpr, thresholds = roc_curve(y_test, probs)
+            hold = [parm[0], parm[1], parm[2], parm[3], parm[4], parm[5], parm[6], parm[7], parm[8], parm[9], parm[10], parm[11], parm[12], parm[13], parm[14], len(muts)]
 
-                valuelist.append(parm[13])
-                fprlist.append(fpr)
-                tprlist.append(tpr)
+            tf = pd.DataFrame(predicted, columns=["Name", "Actual", "Predicted", "Probaility left", "Probaility Right", "Correctly Classified"])
+            tf.to_csv(path+'predicted.csv', index=False)
 
-                # Preciion Recall
-                model = LogisticRegression(solver='lbfgs')
-                model.fit(X_train, y_train)
-                yhat = model.predict_proba(X_test)
-                probs = yhat[:, 1]
-                precision, recall, _ = precision_recall_curve(y_test, probs)
-                parm[14] = auc(recall, precision)
-
-
-                TP = 0
-                FP = 0
-                TN = 0
-                FN = 0
-                for x in predicted:
-                    if x[1] == 1 and x[2] == 1:
-                        TP += 1
-                    if x[1] != 1 and x[2] == 1:
-                        FP += 1
-                    if x[1] != 1 and x[2] != 1:
-                        TN += 1
-                    if x[1] == 1 and x[2] != 1:
-                        FN += 1
-
-                parm[1] = cross
-                parm[2] = TP
-                parm[3] = FP
-                parm[4] = FN
-                parm[5] = TN
-                try:
-                    parm[6] = (TP + TN) / (TP + FP + TN + FN)
-                except:
-                    parm[6] = -1
-                try:
-                    parm[7] = (TP) / (TP + FN)
-                except:
-                    parm[7] = -1
-                try:
-                    parm[8] = (TN) / (TN + FP)
-                except:
-                    parm[8] = -1
-                try:
-                    parm[9] = (TP) / (TP + FP)
-                except:
-                    parm[9] = -1
-                try:
-                    parm[10] = (FN) / (FN + TP)
-                except:
-                    parm[10] = -1
-                try:
-                    parm[11] = (FP) / (FP + TP)
-                except:
-                    parm[11] = -1
-                try:
-                    parm[12] = (FN) / (FN + TN)
-                except:
-                    parm[12] = -1
-
-                hold = [parm[0] + ":" + canc, parm[1], parm[2], parm[3], parm[4], parm[5], parm[6], parm[7], parm[8], parm[9], parm[10], parm[11], parm[12], parm[13], parm[14], len(muts)]
-
-                tf = pd.DataFrame(predicted, columns=["Name", "Actual", "Predicted", "Probaility left", "Probaility Right", "Correctly Classified"])
-                tf.to_csv(path+'predicted.csv', index=False)
-
-                print(str(cross + 1), "/", crossfold)
-
-                if canc == "Uterine":
-                    group1.append(hold)
-                else:
-                    group.append(hold)
-                total.append(hold)
+            print(str(cross + 1), "/", crossfold)
+            group.append(hold)
+            total.append(hold)
 
         tf = pd.DataFrame(group, columns=["Seperator Type", "Three-Fold Run", "TP", "FP", "FN", "TN", "Accuracy",
                                         "Sensitivity", "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic", "Included Muts"])
         tf.to_csv(patha + 'group_stats.csv', index=False)
-        tf = tf.drop("Seperator Type", 1)
-        tf = tf.drop("Three-Fold Run", 1)
+        tf = tf.drop("Seperator Type", axis = 1)
+        tf = tf.drop("Three-Fold Run", axis = 1)
         tfmean = tf.mean().values.tolist()
-        totalmean.append([parm[0] + " : ColRec"] + tfmean)
+        totalmean.append([parm[0]] + tfmean)
 
 
-        tf = pd.DataFrame(group1, columns=["Seperator Type", "Three-Fold Run", "TP", "FP", "FN", "TN", "Accuracy", "Sensitivity", "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic", "Included Muts"])
-        tf.to_csv(patha + 'group1_stats.csv', index=False)
-
-        tf = tf.drop("Seperator Type", 1)
-        tf = tf.drop("Three-Fold Run", 1)
-        tfmean = tf.mean().values.tolist()
-        totalmean.append([parm[0] + " : Uterine"] + tfmean)
+        jf = pd.DataFrame(muts, columns=["Mutations"])
+        jf.to_csv(patha + 'mutations.csv', index=False)
+        
 
         totalruns += 1
         print("\n")
@@ -311,8 +261,9 @@ while tf.empty:
                                         "Specificity", "Precision", "Miss Rate", "False discovery rate", "False omission rate", "ROC_AUC", "PR Logistic",  "Included Muts"])
     tf.to_csv('total_mean.csv', index=False)
 
-    tf = tf[tf["Accuracy"] >= 0.80 - remover]
+    threshold = 0.1
+    tf = tf[tf["Accuracy"] >= threshold - remover]
     
     remover += 0.02
     totalruns = 0
-    print(0.8 - remover, "\n\n")
+    print(threshold - remover, "\n\n")

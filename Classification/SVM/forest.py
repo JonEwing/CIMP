@@ -2,19 +2,14 @@ import pandas as pd
 import os
 import shutil
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import roc_auc_score, roc_curve, auc, precision_recall_curve
-from sklearn.linear_model import LogisticRegression
 from sklearn import svm
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import KFold, GridSearchCV
+from sklearn.model_selection import GridSearchCV
 
-df = pd.read_csv("input/results_new.csv")
+df = pd.read_csv("../input/results_new.csv")
 df = df[df["FP"] + df["TP"] >= 2]
 collist = df["Feature"].tolist()
 
-df = pd.read_csv("input/results.csv")
+df = pd.read_csv("../input/results.csv")
 utelist = df["Feature"].tolist()
 
 intlist = list(set(collist) & set(utelist))
@@ -22,17 +17,17 @@ intlist = list(set(collist) & set(utelist))
 shutil.rmtree("data")
 os.mkdir("data")
 
-df = pd.read_csv("input/results.csv", index_col=0)
+df = pd.read_csv("../input/results.csv", index_col=0)
 df = df.loc[intlist]
 
 intlist.append("class")
 
-colrecdata = pd.read_csv('input/mutfeats_new.csv', index_col=0)
+colrecdata = pd.read_csv('../input/mutfeats_new.csv', index_col=0)
 colrecdata = colrecdata[colrecdata["class"] != 2]
 #colrecdata['class'] = colrecdata['class'].replace([2],-1)
 colrecdata = colrecdata[intlist]
 
-utedata = pd.read_csv('input/mutfeats.csv', index_col=0)
+utedata = pd.read_csv('../input/mutfeats.csv', index_col=0)
 utedata = utedata[utedata["class"] != 2]
 #utedata['class'] = utedata['class'].replace([2],-1)
 utedata = utedata[intlist]
@@ -63,7 +58,7 @@ for a in params:
 total = []
 totalmean = []
 totalruns = 0
-crossfold = 10
+crossfold = 5
 
 tf = pd.DataFrame()
 remover = 0.0

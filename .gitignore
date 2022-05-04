@@ -24,3 +24,12 @@ Make_data/mutations/structural_somatic_mutation.tsv
 Make_data/reduce/meth.tsv
 Classification/SVM/data
 Classification/RF/data
+Classification/KNN/data
+Classification/MLP/data
+Classification/input
+tumor_only_variant_calling/code/graphics/output
+Make_data/graphics/output
+tumor_only_variant_calling/Sample_9_KF9/9_KF9.sv.vcf.gz.tbi
+Make_data/graphics/output/
+tumor_only_variant_calling
+Make_data/graphics/output/
